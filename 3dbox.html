@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Document</title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            height: 100vh;
+            background-color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .change {
+            background-color: rgb(255, 38, 38);
+            color: #dbdbdb;
+            border: none;
+            border-radius: 3px;
+            font-size: 16px;
+            padding: 12px 20px;
+            cursor: pointer;
+            position: absolute;
+            top: 10px;
+            letter-spacing: 1px;
+            box-shadow: 0 3px rgba(249, 202, 36, 0.5);
+            z-index: 100;
+        }
+
+        .change:focus {
+            outline: none;
+        }
+
+        .change:active {
+            box-shadow: none;
+            transform: scale(0.98);
+        }
+
+        .boxes {
+            width: 400px;
+            height: 400px;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            position: relative;
+            transition: all 0.4s ease;
+        }
+
+        .boxes.big {
+            width: 450px;
+            height: 450px;
+        }
+
+        .boxes.big .box {
+            transform: rotate(360deg);
+        }
+
+        .box {
+            width: 100px;
+            height: 100px;
+            background: url('img/bggif.gif');
+            background-size: 400px 400px;
+            position: relative;
+            transition: 0.4s ease;
+        }
+
+        .box::after {
+            content: '';
+            width: 15px;
+            height: 100%;
+            background-color: rgba(200, 200, 200, 0.5);
+            position: absolute;
+            top: 8px;
+            right: -15px;
+            transform: skewY(45deg);
+        }
+
+        .box::before {
+            content: '';
+            width: 100%;
+            height: 15px;
+            background-color: rgba(200, 200, 200, 0.5);
+            position: absolute;
+            bottom: -15px;
+            left: 8px;
+            transform: skewX(45deg);
+        }
+    </style>
+</head>
+
+<body>
+    <button id="btn" class="change">Change</button>
+    <div id="boxes" class="boxes">
+
+    </div>
+
+    <script type="text/javascript">
+        const boxes = document.getElementById('boxes');
+        const btn = document.getElementById('btn');
+
+        btn.addEventListener('click', () => {
+            boxes.classList.toggle('big');
+        })
+
+        for (let i = 0; i < 4; i++) {
+            for (let j = 0; j < 4; j++) {
+                const box = document.createElement('div');
+                box.classList.add('box');
+                box.style.backgroundPosition = `${-j * 100}px ${-i * 100}px`
+                boxes.appendChild(box);
+            }
+        }
+    </script>
+</body>
+
+</html>

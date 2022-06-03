@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Digital Clock</title>
+  <style type="text/css">
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: rgb(17, 27, 53);
+    }
+
+    .datetime {
+      color: #fff;
+      background: rgb(17, 27, 53);
+      width: 400px;
+      padding: 20px 30px;
+      border: 3px solid rgb(255, 37, 37);
+      border-radius: 10px;
+      -webkit-box-reflect: below 1px linear-gradient(transparent, rgba(255, 255, 255, 0.3));
+      transition: all 0.5s;
+    }
+
+    .datetime:hover {
+      background: rgb(255, 37, 37);
+      box-shadow: 0 0 30px rgb(255, 37, 37);
+    }
+
+    .date {
+      text-align: center;
+      font-size: 22px;
+      font-weight: 600;
+      letter-spacing: 5px;
+    }
+
+    .time {
+      font-size: 60px;
+      /* text-align: center; */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      letter-spacing: 5px;
+    }
+
+    .time span:not(:last-child) {
+      margin: 5px 0px;
+    }
+
+    .time span:last-child {
+      background: rgb(255, 37, 37);
+      font-size: 30px;
+      font-weight: 600;
+      text-transform: uppercase;
+      margin-top: 5px;
+      margin-left: 3px;
+      border-radius: 3px;
+      padding: 5px;
+    }
+
+    .color {
+      color: rgb(255, 37, 37);
+    }
+
+    .datetime:hover .color {
+      color: rgb(255, 255, 255);
+      /* transition: all 0.5s; */
+    }
+  </style>
+</head>
+
+<body onload="currentTime()">
+  <div class="datetime">
+    <div class="date">
+      <span id="daynum">00</span>
+      <span id="dayname">Day</span><span class="color">/</span>
+      <span id="month">Month</span><span class="color">/</span>
+      <span id="year">Year</span>
+    </div>
+    <div class="time">
+      <span id="hour">00</span><span class="color">:</span>
+      <span id="minutes">00</span><span class="color">:</span>
+      <span id="seconds">00</span>
+      <span id="period">AM</span>
+    </div>
+  </div>
+  <script>
+    function updateTime() {
+      var cur = new Date();
+      var dnum = cur.getDate();
+      dname = cur.getDay();
+      month = cur.getMonth();
+      year = cur.getFullYear();
+      hour = cur.getHours();
+      min = cur.getMinutes();
+      sec = cur.getSeconds();
+      pi = "AM";
+
+      var monthName = [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "Augest",
+        "September",
+        "October",
+        "November",
+        "December",
+      ];
+      var dayName = [
+        "Sunday",
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+      ];
+
+      if (hour === 0) {
+        hour = 12;
+      }
+
+      if (hour > 12) {
+        hour = hour - 12;
+        pi = "PM";
+      }
+
+      function pad(numb) {
+        return (numb < 10 ? "0" : "") + numb;
+      }
+
+      document.getElementById("daynum").innerHTML = pad(dnum);
+      document.getElementById("dayname").innerHTML = dayName[dname];
+      document.getElementById("month").innerHTML = monthName[month];
+      document.getElementById("year").innerHTML = year;
+      document.getElementById("hour").innerHTML = pad(hour);
+      document.getElementById("minutes").innerHTML = pad(min);
+      document.getElementById("seconds").innerHTML = pad(sec);
+    }
+
+    function currentTime() {
+      updateTime();
+      window.setInterval("updateTime()", 1000);
+    }
+  </script>
+</body>
+
+</html>

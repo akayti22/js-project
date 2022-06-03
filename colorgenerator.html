@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>color</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <style type="text/css">
+        body{
+            margin: 0;
+            padding: 0;
+        }
+
+        html{
+            font-family: 'Lato', sans-serif;
+        }
+
+        .container{
+            width:100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #555;
+        }
+
+        /* .model{
+            width: 600px;
+            height:200px;
+            box-shadow: 3px 3px 10px rgba(0,0,0,0.7),
+            inset -3px -3px 10px rgba(0,0,0,0.5);
+            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        } */
+
+        button{
+            /* margin-top: 60px; */
+            width: 150px;
+            height: 50px;
+            background-color: transparent;
+            box-shadow: 1px 1px 10px rgba(0,0,0,0.5),
+            inset -3px -3px 10px rgba(0,0,0,0.5),
+            -1px -1px 10px rgba(0,0,0,0.5);
+            border: none;
+            font-size: 18px;
+            color:#fff;
+            border-radius: 8px;
+            font-weight: 600;
+        }
+
+        h1{ 
+            margin-right: 10px;
+            letter-spacing: 5px;
+            color: #fff;
+            font-size: 40px;
+            width: 200px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container" id="container">
+        <div class="model" id="model">
+            <h1 id="title">#555</h1>
+            <button onclick="change()" id="color">Change Color</button>
+        </div>
+    </div>
+    <script type="text/javascript">
+        const bg = document.getElementById('container');
+        const model = document.getElementById('model');
+        const title =  document.getElementById('title');
+        const color = document.getElementById('color');
+        
+        function change(){
+            let char = "ABCDEF0123456789";
+            let result ="";
+            
+            for(i=0 ; i<6;i++){
+                let random = Math.floor(Math.random()*16);
+                result += char[random];
+            };
+
+            if(result === "ffffff"){
+                title.style.color = "#000";
+                color.style.color = "#000";
+                
+            }
+
+            bg.style.background = "#" + result;
+            title.textContent = "#" + result;
+        }
+
+
+    </script>
+</body>
+</html>

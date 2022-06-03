@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Clock</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Neonderthaw&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style type="text/css">
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        height: 100vh;
+        background: #222222;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        position: relative;
+      }
+
+      html{
+        font-family: 'Neonderthaw';
+        /* font-family: 'Roboto', sans-serif; */
+      }
+
+      .hour,
+      .minute,
+      .second,
+      .text,
+      .inner1,
+      .inner2,
+      .inner3 {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border-radius: 50%;
+      }
+
+      .hour,
+      .minute,
+      .second {
+        box-shadow: 1px 1px 10px rgba(255, 255, 255, 0.2),
+          inset -2px -2px 10px rgba(0, 0, 0, 1);
+      }
+
+      .inner1,
+      .inner2{
+        background-color: #222222;
+        box-shadow: 1px 1px 10px rgba(0, 0, 0, 1);
+      }
+
+      .hour {
+        width: 450px;
+        height: 450px;
+        background: conic-gradient(#ee4540 60%,#222222 30%);
+      }
+
+      .minute {
+        width: 380px;
+        height: 380px;
+        background: conic-gradient(#c72c41, #c72c41);
+      }
+      /* #c72c41 */
+      .second {
+        width: 320px;
+        height: 320px;
+        background: conic-gradient(#bb0c6f, #bb0c6f);
+      }
+
+      .text {
+        width: 200px;
+        line-height: 50px;
+        color: #fff;
+        font-size: 38px;
+        letter-spacing: 5px;
+        text-shadow: 1px 1px 5px rgba(255, 255, 255, 0.4);
+        text-align: center;
+      }
+
+      .inner1 {
+        width: 410px;
+        height: 410px;
+      }
+
+      .inner2 {
+        width: 350px;
+        height: 350px;
+      }
+
+      .inner3 {
+        width: 290px;
+        height: 290px;
+        background-color: #444;
+        box-shadow: 1px 1px 10px rgba(0, 0, 0, 1);
+      }
+
+      .color1 {
+        color: #ff4242;
+      }
+
+      .color3 {
+        color: rgb(3, 195, 253);
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="hour">
+        <div class="inner1">
+          <div class="minute">
+            <div class="inner2">
+              <div class="second">
+                <div class="inner3">
+                  <div class="text">
+                    <p>
+                      <span class="color1" id="hour">00</span>:<span
+                        class="color1"
+                        id="minute"
+                        >00</span
+                      >:<span class="color1" id="second">00</span>
+                      <span class="color3" id="period">AM</span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script type="text/javascript">
+      function time(){
+      const hour = document.querySelector(".hour");
+      const minute = document.querySelector(".minute");
+      const second = document.querySelector(".second");
+      const hournum = document.querySelector("#hour");
+      const minutenum = document.querySelector("#minute");
+      const secondnum = document.querySelector("#second");
+      const period = document.querySelector("#period");
+
+      let curtime = new Date();
+      let curhour = curtime.getHours();
+      let curminute = curtime.getMinutes();
+      let cursecond = curtime.getSeconds();
+      let pi = "AM";
+
+      if (curhour > 12) {
+        curhour -= 12;
+        pi = "PM";
+      }
+
+      if (curhour === 0) {
+        curhour = 12;
+      }
+
+      function pad(num) {
+        let x = num;
+        if (x < 10) {
+          x = "0" + x;
+        } else {
+          x = "" + x;
+        }
+        return x;
+        // return (num < 10 ? "0" : "") + num;
+      }
+
+      let minute1 = Math.floor((curminute*6*100)/360);
+      let second1 = Math.floor((cursecond*6*100)/360);
+      let hour1 = Math.floor((curhour*30*100)/360);
+
+      hournum.textContent = pad(curhour);
+      minutenum.textContent = pad(curminute);
+      secondnum.textContent = pad(cursecond);
+      period.textContent = pi;
+
+      hour.style.background = `conic-gradient(#ee4540 ${hour1}%, #222222 0% ${100 - hour1}%)`;
+      minute.style.background = `conic-gradient(#c72c41 ${minute1}%, #222222 0% ${100 - minute1}%)`;
+      second.style.background = `conic-gradient(#bb0c6f ${second1}%, #222222 0% ${100 - second1}%)`;
+      };
+
+      setInterval(time,1000);
+    </script>
+  </body>
+</html>

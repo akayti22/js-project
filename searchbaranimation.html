@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Search Bar</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+        integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: #fa9a94;
+        }
+
+        .search-box {
+            height: 60px;
+            width: 60px;
+            position: relative;
+            transition: all 0.5s cubic-bezier(0.5, -0.5, 0.7, 1.6);
+        }
+
+        .search-box.active {
+            width: 350px;
+        }
+
+        .search-box input {
+            height: 100%;
+            width: 100%;
+            border: none;
+            color: #888;
+            background: #dfdfdf;
+            font-size: 20px;
+            border-radius: 50px;
+            padding: 0px 60px 0px 20px;
+            outline: none;
+            opacity: 0;
+            transition: all 0.5s cubic-bezier(0.5, -0.5, 0.7, 1.6);
+        }
+
+        .search-box input.active {
+            opacity: 1;
+        }
+
+        ::placeholder {
+            color: #888;
+            letter-spacing: 1px;
+        }
+
+        .search-box .search-btn {
+            height: 60px;
+            width: 60px;
+            color: #fa9a94;
+            position: absolute;
+            top: 50%;
+            right: 0;
+            transform: translateY(-50%);
+            background: #dfdfdf;
+            font-size: 22px;
+            line-height: 60px;
+            text-align: center;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 1;
+            transition: all 0.5s cubic-bezier(0.5, -0.5, 0.7, 1.6);
+        }
+
+        /*  */
+        .search-box .search-btn.active {
+            right: 5px;
+            height: 50px;
+            width: 50px;
+            color: #dfdfdf;
+            background: #fa9a94;
+            line-height: 50px;
+            font-size: 20px;
+            transform: translateY(-50%) rotate(360deg);
+        }
+
+        .search-box .cancel-btn {
+            color: #dfdfdf;
+            font-size: 25px;
+            position: absolute;
+            top: 50%;
+            right: 20px;
+            transform: translateY(-50%);
+            cursor: pointer;
+        }
+
+        .search-box .cancel-btn.active {
+            right: -40px;
+            transform: translateY(-50%) rotate(360deg);
+            transition: all 0.5s 0.2s;
+        }
+
+        .data {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 28px;
+            color: #eee;
+            letter-spacing: 4px;
+            display: block;
+        }
+
+        .data.active {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="search-box">
+        <input type="text" placeholder="Search....">
+        <div class="search-btn">
+            <i class="fas fa-search"></i>
+        </div>
+        <div class="cancel-btn">
+            <i class="fas fa-times"></i>
+        </div>
+        <div class="data"><i></i></div>
+    </div>
+    <script type="text/javascript">
+        const searchBtn = document.querySelector('.search-btn');
+        const searchInput = document.querySelector('input');
+        const searchBox = document.querySelector('.search-box');
+        const closeBtn = document.querySelector('.cancel-btn');
+        const searchvalue = document.querySelector('.data');
+
+        searchBtn.addEventListener('click', function () {
+            searchBox.classList.add('active');
+            searchInput.classList.add('active');
+            searchBtn.classList.add('active');
+            closeBtn.classList.add('active');
+            if (searchInput.value != "") {
+                let value = searchInput.value;
+
+                searchvalue.classList.remove('active');
+                searchvalue.innerHTML = '<i>' + value + '</i>';
+            } else {
+                searchvalue.innerHTML = "";
+            }
+        })
+
+        closeBtn.addEventListener('click', function () {
+            searchBox.classList.remove('active');
+            searchInput.classList.remove('active');
+            searchBtn.classList.remove('active');
+            closeBtn.classList.remove('active');
+            searchvalue.classList.add('active');
+            searchInput.value = "";
+        })
+    </script>
+</body>
+
+</html>
